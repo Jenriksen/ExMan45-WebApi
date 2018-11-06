@@ -18,7 +18,10 @@ namespace Ex45Man_WebApi.Controllers
 
             if (_context.pointofinterests.Count() == 0)
             {
-                _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 1, Id = 1, Name = "HC Andersens hus", Description = "..." });
+                _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 1, Name = "HC Andersens hus", Description = "..." });
+                _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 1, Name = "Odense Zoo", Description = "..." });
+                _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 2, Name = "Bølgen", Description = "..." });
+                _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 2, Name = "Skyttehuset", Description = "..." });
                 _context.SaveChanges();
             }
 
@@ -30,16 +33,23 @@ namespace Ex45Man_WebApi.Controllers
             return _context.pointofinterests.ToList();
         }
 
-        // [HttpGet("{Id}")]
-        // public ActionResult<PointOfInterest> GetSpecific(int Id){
-        //     var city = _context.cities.Find(Id);
+        [HttpGet("{id}", Name = "GetPointOfInterest")]
+        public ActionResult<PointOfInterest> GetSpecific(long id){
+            var poi = _context.pointofinterests.Find(id);
+            
+            if(poi==null){
+                return NotFound();
+            }
 
-        //     foreach (var poi in _context.cities.)
-        //     {
-                
-        //     }
+            return poi;
+        }
 
-        //     return 
-        // }
+        [HttpPost]
+        public IActionResult Create(PointOfInterest pointOfInterest){
+            _context.pointofinterests.Add(pointOfInterest);
+            _context.SaveChanges();
+
+            return CreatedAtRoute("GetPointOfInterest", new { Id = pointOfInterest.Id}, pointOfInterest);
+        }
     }
 }

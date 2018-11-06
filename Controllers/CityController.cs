@@ -19,6 +19,7 @@ namespace Ex45Man_WebApi
             if (_dbContext.cities.Count() == 0)
             {
                 _dbContext.cities.Add(new City { Name = "Odense", Id = 1, Description = "Her bor du" });
+                _dbContext.cities.Add(new City { Name = "Vejle", Id = 2, Description = "Her burde du bo" });
                 _dbContext.SaveChanges();
             }
         }
