@@ -10,31 +10,37 @@ namespace Ex45Man_WebApi
     [ApiController]
     public class CityController : ControllerBase
     {
-        private readonly CityContext _dbContext;
+        private readonly CityContext _context;
 
-        public CityController(CityContext dbContext)
+        public CityController(CityContext Context)
         {
-            _dbContext = dbContext;
+            _context = Context;
 
-            if (_dbContext.cities.Count() == 0)
+            if (_context.cities.Count() == 0)
             {
-                _dbContext.cities.Add(new City { Name = "Odense", Id = 1, Description = "Her bor du" });
-                _dbContext.cities.Add(new City { Name = "Vejle", Id = 2, Description = "Her burde du bo" });
-                _dbContext.SaveChanges();
+                _context.cities.Add(new City { Name = "Odense", Id = 1, Description = "Her bor du" });
+                _context.cities.Add(new City { Name = "Vejle", Id = 2, Description = "Her burde du bo" });
+
+                _context.pointofinterests.Add(new PointOfInterest { CityId = 1, Name = "HC Andersens hus", Description = "..." });
+                _context.pointofinterests.Add(new PointOfInterest { CityId = 1, Name = "Odense Zoo", Description = "..." });
+                _context.pointofinterests.Add(new PointOfInterest { CityId = 2, Name = "Bølgen", Description = "..." });
+                _context.pointofinterests.Add(new PointOfInterest { CityId = 2, Name = "Skyttehuset", Description = "..." });
+
+                _context.SaveChanges();
             }
         }
 
         [HttpGet]
-        public ActionResult<List<City>> Get()
+        public IEnumerable<City> Get()
         {
 
-            return _dbContext.cities.ToList();
+            return _context.cities;
         }
 
         [HttpGet("{id}", Name = "GetCity")]
         public ActionResult<City> GetCity(long id)
         {
-            var city = _dbContext.cities.Find(id);
+            var city = _context.cities.Find(id);
 
             if (city == null)
             {
@@ -46,7 +52,7 @@ namespace Ex45Man_WebApi
 
         [HttpGet("{id}/withpoi")]
         public ActionResult<City> GetCityWithPoi(long id){
-            var city = _dbContext.cities.Find(id);
+            var city = _context.cities.Find(id);
 
             if(city==null){
                 return NotFound();
@@ -57,8 +63,8 @@ namespace Ex45Man_WebApi
 
         [HttpPost]
         public IActionResult Create (City city){
-            _dbContext.cities.Add(city);
-            _dbContext.SaveChanges();
+            _context.cities.Add(city);
+            _context.SaveChanges();
 
             return CreatedAtRoute("GetCity", new { Id = city.Id }, city);
         }

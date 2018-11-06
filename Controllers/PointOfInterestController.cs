@@ -16,14 +16,14 @@ namespace Ex45Man_WebApi.Controllers
         {
             _context = context;
 
-            if (_context.pointofinterests.Count() == 0)
-            {
-                _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 1, Name = "HC Andersens hus", Description = "..." });
-                _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 1, Name = "Odense Zoo", Description = "..." });
-                _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 2, Name = "Bølgen", Description = "..." });
-                _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 2, Name = "Skyttehuset", Description = "..." });
-                _context.SaveChanges();
-            }
+            // if (_context.pointofinterests.Count() == 0)
+            // {
+            //     _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 1, Name = "HC Andersens hus", Description = "..." });
+            //     _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 1, Name = "Odense Zoo", Description = "..." });
+            //     _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 2, Name = "Bølgen", Description = "..." });
+            //     _context.pointofinterests.Add(entity: new PointOfInterest { CityId = 2, Name = "Skyttehuset", Description = "..." });
+            //     _context.SaveChanges();
+            // }
 
         }
 
@@ -51,7 +51,9 @@ namespace Ex45Man_WebApi.Controllers
         {
             var poi = _context.pointofinterests.Find(PoiId);
 
-            return PoiId;
+
+
+            return poi;
         }
 
         [HttpPost]

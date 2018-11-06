@@ -12,14 +12,13 @@ namespace Ex45Man_WebApi.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Added to auto-increment Id
-        public long Id {get; set;}
+        public int Id {get; set;}
         [StringLength(20)]
         public string Name {get; set;}
         [StringLength(100, MinimumLength=3)]
         public string Description {get; set;}
 
-        [ForeignKey("CityForeignKey")]
-        public City City;
-        public int CityId;
+        public int CityId {get; set;}
+        public City City{get;set;}
     }
 }
