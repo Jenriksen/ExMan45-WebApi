@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,11 +9,16 @@ namespace Ex45Man_WebApi.Models
 {
     public class City 
     {
-        public long id {get; set;}
-        public string name {get; set;}
-        public string description {get; set;}
+        [Key]
+        [Required]
+        public long Id {get; set;}
 
-        public List<PointOfInterest> poi {get; set;}
+        [Required]
+        public string Name {get; set;}
+        
+        public string Description {get; set;}
+
+        public List<PointOfInterest> Poi {get; set;}
 
     }
 

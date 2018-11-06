@@ -18,7 +18,7 @@ namespace Ex45Man_WebApi
 
             if (_dbContext.cities.Count() == 0)
             {
-                _dbContext.cities.Add(new City { name = "Odense", id = 1, description = "Her bor du" });
+                _dbContext.cities.Add(new City { Name = "Odense", Id = 1, Description = "Her bor du" });
                 _dbContext.SaveChanges();
             }
         }
@@ -54,7 +54,13 @@ namespace Ex45Man_WebApi
             return city;
         }
 
-        //[HttpPost]
+        [HttpPost]
+        public IActionResult Create (City city){
+            _dbContext.cities.Add(city);
+            _dbContext.SaveChanges();
+
+            return CreatedAtRoute("GetCity", new { Id = city.Id }, city);
+        }
 
 
     }
