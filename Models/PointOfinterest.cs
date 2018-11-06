@@ -11,7 +11,7 @@ namespace Ex45Man_WebApi.Models
     public class PointOfInterest
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Added to auto-increment Id
         public long Id {get; set;}
         [StringLength(20)]
         public string Name {get; set;}
