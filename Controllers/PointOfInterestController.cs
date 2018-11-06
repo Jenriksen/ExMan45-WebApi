@@ -30,7 +30,7 @@ namespace Ex45Man_WebApi.Controllers
         [HttpGet]
         public ActionResult<List<PointOfInterest>> Get()
         {
-            return _context.pointofinterests.ToList();
+            return _context.pointofinterests.Include("City").ToList();
         }
 
         [HttpGet("{id}", Name = "GetPointOfInterest")]

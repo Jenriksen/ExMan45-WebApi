@@ -34,7 +34,7 @@ namespace Ex45Man_WebApi
         public IEnumerable<City> Get()
         {
 
-            return _context.cities;
+            return _context.cities.Include(x => x.PointOfInterests);
         }
 
         [HttpGet("{id}", Name = "GetCity")]
