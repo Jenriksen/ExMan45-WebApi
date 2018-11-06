@@ -34,22 +34,35 @@ namespace Ex45Man_WebApi.Controllers
         }
 
         [HttpGet("{id}", Name = "GetPointOfInterest")]
-        public ActionResult<PointOfInterest> GetSpecific(long id){
+        public ActionResult<PointOfInterest> GetPointOfInterest(long id)
+        {
             var poi = _context.pointofinterests.Find(id);
-            
-            if(poi==null){
+
+            if (poi == null)
+            {
                 return NotFound();
             }
 
             return poi;
         }
 
+        [HttpGet("{CityId}/poi/{PoiId}")]
+        public ActionResult<PointOfInterest> GetPointOfInterestForCity(long CityId, long PoiId)
+        {
+            var poi = _context.pointofinterests.Find(PoiId);
+
+            return PoiId;
+        }
+
         [HttpPost]
-        public IActionResult Create(PointOfInterest pointOfInterest){
+        public IActionResult Create(PointOfInterest pointOfInterest)
+        {
             _context.pointofinterests.Add(pointOfInterest);
             _context.SaveChanges();
 
-            return CreatedAtRoute("GetPointOfInterest", new { Id = pointOfInterest.Id}, pointOfInterest);
+
+
+            return CreatedAtRoute("GetPointOfInterest", new { Id = pointOfInterest.Id }, pointOfInterest);
         }
     }
 }

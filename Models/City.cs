@@ -21,7 +21,7 @@ namespace Ex45Man_WebApi.Models
         public string Description {get; set;}
 
         public List<PointOfInterest> Poi {get; set;}
-
+        
     }
 
 }
